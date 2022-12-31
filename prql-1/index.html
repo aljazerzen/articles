@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="/dist/reset.css">
+		<link rel="stylesheet" href="/dist/reveal.css">
+		<link rel="stylesheet" href="/dist/theme/black.css">
+
+		<link rel="stylesheet" href="./plugin/highlight.css">
+		<style>
+			.reveal table td {
+				padding: 0.1em 0.5em 0 0.5em;
+				border-bottom: 0;
+			}
+			.reveal .row {
+				display: flex;
+				gap: 1rem;
+				align-items: start;
+				justify-content: center;
+			}
+			.reveal .row>* {
+				margin: 0;
+			}
+            .reveal pre {
+                overflow-y: hidden;
+            }
+            .reveal pre code {
+                max-height: 500px;
+                overflow-y: hidden;
+            }
+            .reveal table:not(.hljs-ln) {
+                font-size: 80%;
+            }
+            .reveal .slides > section {
+            	perspective: initial;
+            }
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+		 	<div class="slides">
+				<section data-markdown="content.md"
+				         data-separator="^---$"
+				         data-separator-vertical="^--$"
+				         data-charset="utf-8"
+				         data-auto-animate>
+				</section>
+			</div>
+		</div>
+
+		<script src="/dist/reveal.js"></script>
+		<script src="/plugin/notes/notes.js"></script>
+		<script src="/plugin/markdown/markdown.js"></script>
+		<script src="./plugin/highlight.js"></script>
+		<script src="./plugin/prql.js" bl></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+			  	controls: false,
+
+  				autoAnimateDuration: 0.5,
+			  	autoAnimateUnmatched: false,
+
+  				minScale: 1.4,
+  				maxScale: 1.4,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+                highlight: {
+                    beforeHighlight: hljs => {
+                        console.log(formatting(hljs))
+                        hljs.registerLanguage('prql', formatting)
+                    }
+                },
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMarkdown ]
+			});
+		</script>
+	</body>
+</html>
